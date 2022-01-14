@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Tip calculator app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SPLI</h1>
+    <H1>TTER</H1>
+  </header>
+  <div class="container">
+    <div class="column1">
+      <p class="column1__billTitle"><strong>Bill</strong></p>
+      <input type="number" name="inputValue" maxlength="6" placeholder="0" id="column1__billInput" oninput="getInputValue()" >
+      <p class="column1__tipTitle"><strong>Select Tip %</strong></p>
+      <div class="column1__tipsContainer">
+        <button id="column1__tipsContainer--five" class="column1__tipBtn">5%</button>
+        <button id="column1__tipsContainer--ten" class="column1__tipBtn">10%</button>
+        <button id="column1__tipsContainer--fifteen" class="column1__tipBtn">15%</button>
+        <button id="column1__tipsContainer--twentyfive" class="column1__tipBtn">25%</button>
+        <button id="column1__tipsContainer--fifty" class="column1__tipBtn">50%</button>
+        <input type="number" placeholder="Custom" id="column1__tipsContainer--custom"></button>
+      </div>
+      <div class="column1__numberPeopleStuff">
+        <p class="column1__numberPeopleTitle">Number of People</p>
+        <p id="zeroError" class="column1__numberPeopleErrorNotDisplayed">Can't be zero</p>
+      </div>
+      <div id="input__container" class="inputContainer">
+        <input type="number" placeholder="0" class="column1__numberPeopleInput" oninput="getNumberOfPeople()">
+      </div>
+    </div>
+    <div class="space">
+    </div>
+    <div class="column2"> 
+      <div class="column2__container">
+        <div class="column2__container--boxOne">
+          <div class="boxOne__tip">
+            <div class="tip__text">
+              <div class="text1">
+                <p>Tip Amount</p>
+              </div>
+              <div class="text2">
+                <p>/ person</p>
+              </div>
+            </div>
+            <div id="tip__numbers">
+              $0.00
+            </div>
+          </div>
+          <div class="boxOne__total">
+            <div class="amount__text">
+              <div class="text1">
+                <p>Total</p>
+              </div>
+              <div class="text2">
+                <p>/ person</p>
+              </div>
+            </div>
+            <div id="total__numbers">
+              $0.00
+            </div>
+          </div>
+        </div>
+        <div class="column2__container--boxTwo">
+          <button id="resetBtn">RESET</button>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
