@@ -323,7 +323,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-@media (max-width: 375px) {
+@media (max-width: 415px) {
     body {
         margin: 0;
         min-height: auto;
