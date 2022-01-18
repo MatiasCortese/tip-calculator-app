@@ -1,125 +1,110 @@
-// tip percentage  button clicked
-let fivePercent = document.getElementById("column1__tipsContainer--five")
-let tenPercent = document.getElementById("column1__tipsContainer--ten")
-let fifteenPercent = document.getElementById("column1__tipsContainer--fifteen")
-let twentyfivePercent = document.getElementById("column1__tipsContainer--twentyfive")
-let fiftyPercent = document.getElementById("column1__tipsContainer--fifty")
-let custom = document.getElementById("column1__tipsContainer--custom")
-let reset = document.getElementById("resetBtn")
-let tipNumbers = document.getElementById("tip__numbers")
-let totalNumbers = document.getElementById("total__numbers")
-let errorMsg = document.getElementById("zeroError")
-let inputContainer = document.getElementById("input__Container")
-let buttons = document.getElementsByClassName("column1__tipBtn")
+const bill = document.getElementById("billInput")
+const tipBtns = document.getElementsByClassName("tipBtn")
+const custom = document.getElementById("tipCustom")
+const numOfPeople = document.getElementById("people-input")
+const tipNumbers = document.getElementById("tip__numbers")
+const totalNumbers = document.getElementById("total__numbers")
+const reset = document.getElementById("resetBtn")
+const error = document.getElementById("zeroError")
+let inputContainer = document.getElementById("input-container")
 
-// Bill value input
-function getInputValue() {
-    let inputValue = document.getElementById("column1__billInput").value
-    bill = parseInt(inputValue)
-    if (bill < 1 || bill > 1000000) {
-        alert("Must be more than 1 and less than 1kk")
-    } 
-    return bill
-}
+bill.addEventListener('input', setBillValue)
+Array.from(tipBtns).forEach(btn => {
+    btn.addEventListener('click', handleClick)
+})
+custom.addEventListener('input', setCustomTip)
+numOfPeople.addEventListener('input', setPeopleValue)
+reset.addEventListener('click', resetApp)
 
-// Function that take number of people
-function getNumberOfPeople() {
-    let numberOfPeople = document.querySelector(".column1__numberPeopleInput").value
-    let numberOfPeopleIn = document.querySelector(".column1__numberPeopleInput")
-    numOfPeople = parseInt(numberOfPeople)
-    if (numOfPeople < 1) {
-        errorMsg.classList.remove("column1__numberPeopleErrorNotDisplayed")
-        errorMsg.classList.add("column1__numberPeopleErrorDisplayed")
-        numberOfPeopleIn.classList.add("redBorder")
-    } 
-    if (numOfPeople > 0) {
-        errorMsg.classList.add("column1__numberPeopleErrorNotDisplayed")
-        numberOfPeopleIn.classList.remove("redBorder")
-    }
-    return numOfPeople
-    
-}
+let billValue = 0 // default value
+let tipValue = 0.15 // default value -> 15% button is active
+let peopleValue = 1
 
-custom.addEventListener('input', function(){
-    customPercentage = custom.value
-    customPercentage = parseInt(customPercentage)
-    if (customPercentage < 1 || customPercentage > 100) {
-        alert("Must be more than 1 and less than 100")
-        tipNumbers.innerHTML = "$" + 0 + "." + 0 + 0
-        totalNumbers.innerHTML = "$" + 0 + "." + 0 + 0
-        customPercentage.delete()
-        custom.placeholder.innerHTML = "Jjejeje"
+function setBillValue() {
+    billValue = bill.value
+    if(billValue > 0 && billValue < 1000000) {
+    calculations()
     } else {
-    customPercentage /= 100
-    tipCalculation = bill * customPercentage / numOfPeople
-    tipNumbers.innerHTML = "$" + tipCalculation.toFixed(2)
-    totalCalculation = bill / numOfPeople + tipCalculation
-    totalNumbers.innerHTML = "$" + totalCalculation.toFixed(2)
-    return tipNumbers, totalNumbers 
+        alert("Please insert a bill")
+        resetApp()
     }
-})
+    return billValue
+}
 
+function handleClick(event) {
+    Array.from(tipBtns).forEach(btn => {
+        // clear the active state
+        btn.classList.remove('active-tip')
 
-fivePercent.addEventListener('click', function() {
-    fivePercent.classList.add("selectedBtn")
-    tipCalculation = bill * 0.05 / numOfPeople
-    tipNumbers.innerHTML = "$" + tipCalculation.toFixed(2)
-    totalCalculation = bill / numOfPeople + tipCalculation
-    totalNumbers.innerHTML = "$" + totalCalculation.toFixed(2)
-    return tipNumbers, totalNumbers
-})
+        //set active state
+        if(event.target.innerHTML == btn.innerHTML) {
+            btn.classList.add('active-tip')
+            tipValue = parseFloat(btn.innerHTML)/100
+        }     
+    })
+    //clear custom tip
+    custom.value = ''
+    calculations()
+    return tipValue
+}
 
-tenPercent.addEventListener('click', function() {
-    tenPercent.classList.add("selectedBtn")
-    tipCalculation = bill * 0.10 / numOfPeople
-    tipNumbers.innerHTML = "$" + tipCalculation.toFixed(2)
-    totalCalculation = bill / numOfPeople + tipCalculation
-    totalNumbers.innerHTML = "$" + totalCalculation.toFixed(2)
-    return tipNumbers, totalNumbers
-})
+function setPeopleValue() {
+    peopleValue = numOfPeople.value
+    if (peopleValue <= 0) {
+        error.classList.remove("error-hidden")
+        error.classList.add("error")
+        numOfPeople.classList.add("redBorder")
+    } else {
+        numOfPeople.classList.remove("redBorder")
+        error.classList.add("error-hidden")
+        calculations()
+        return peopleValue
+    }  
+}
 
-fifteenPercent.addEventListener('click', function() {
-    fifteenPercent.classList.add("selectedBtn")
-    tipCalculation = bill * 0.15 / numOfPeople
-    tipNumbers.innerHTML = "$" + tipCalculation.toFixed(2)
-    totalCalculation = bill / numOfPeople + tipCalculation
-    totalNumbers.innerHTML = "$" + totalCalculation.toFixed(2)
-    return tipNumbers, totalNumbers
-})
+function setCustomTip() {
+    let customValue = custom.value
+    customValue = customValue/100
+    calculations()
+    return customValue
+}
 
-twentyfivePercent.addEventListener('click', function() {
-    twentyfivePercent.classList.add("selectedBtn")
-    tipCalculation = bill * 0.25 / numOfPeople
-    tipNumbers.innerHTML = "$" + tipCalculation.toFixed(2)
-    totalCalculation = bill / numOfPeople + tipCalculation
-    totalNumbers.innerHTML = "$" + totalCalculation.toFixed(2)
-    return tipNumbers, totalNumbers
-})
+function calculations() {
+        if (custom.value == '') {
+            let tipAmount = billValue * tipValue / peopleValue
+            let total = billValue / peopleValue + tipAmount 
+            tipNumbers.innerHTML = "$" + tipAmount.toFixed(2)
+            totalNumbers.innerHTML = "$" + total.toFixed(2)
+            return tipAmount, total
+        }
+        if (custom.value != '' && custom.value > 0 && custom.value <= 100 ) {
+            removeActiveState()
+            let customValue = custom.value
+            customValue = customValue/100
+            let tipAmount = billValue * customValue / peopleValue
+            let total = billValue / peopleValue + tipAmount 
+            tipNumbers.innerHTML = "$" + tipAmount.toFixed(2)
+            totalNumbers.innerHTML = "$" + total.toFixed(2)
+            return tipAmount, total
+        } 
+}
 
-fiftyPercent.addEventListener('click', function() {
-    fiftyPercent.classList.add("selectedBtn")
-    tipCalculation = bill * 0.50 / numOfPeople
-    tipNumbers.innerHTML = "$" + tipCalculation.toFixed(2)
-    totalCalculation = bill / numOfPeople + tipCalculation
-    totalNumbers.innerHTML = "$" + totalCalculation.toFixed(2)
-    return tipNumbers, totalNumbers
-})
+function resetApp() {
+    tipNumbers.innerHTML = '$' + 0 + '.' + 0 + 0
+    totalNumbers.innerHTML = '$' + 0 + '.' + 0 + 0
+    bill.value = ''
+    numOfPeople.value = ''
+    numOfPeople.classList.remove("redBorder")
+    error.classList.remove("error")
+    error.classList.add("error-hidden")
+    custom.value = ''
+    removeActiveState()
+    tipBtns[2].classList.add('active-tip')
+}
 
-// reset button
-reset.addEventListener('click', function(){
-    tipNumbers.innerHTML = "$" + 0 + "." + 0 + 0
-    totalNumbers.innerHTML = "$" + 0 + "." + 0 + 0
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove("selectedBtn")
-        buttons[i].classList.add("column1__tipBtn")
-    }
-    return tipNumbers, totalNumbers, buttons
-    /* Acá hay que hacer un for each que al clickear el reset a todos los botones le aplique la clase común, es decir, no selected */
-})
-
-
-
-
-
-
-
+function removeActiveState() {
+    Array.from(tipBtns).forEach(btn => {
+        // clear the active state
+    btn.classList.remove('active-tip')
+    })
+}

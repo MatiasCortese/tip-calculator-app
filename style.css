@@ -39,7 +39,7 @@ h1 {
     margin: 0;   
 }
 
-.container {
+.app-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -65,18 +65,22 @@ h1 {
 
 }
 
-.column1__billTitle, .column1__tipTitle, .column1__numberPeopleTitle {
+#billTitle, #tipTitle, #numberPeopleTitle {
     color: var(--1Dark-grayish-cyan);
     font-size: 0.8rem;
     margin: 0;
     margin-bottom: 0.5rem;
 }
 
-#column1__billInput, .column1__numberPeopleInput {
+#billInput {
+    
+}
+
+.inp-style {
     background-color: var(--2Light-grayish-cyan);
-    border: none;
     border-radius: 5px;
     height: 2rem;
+    border: none;
     text-decoration: none;
     color: var(--Very-dark-cyan);
     font-family: 'Space Mono', monospace;
@@ -86,14 +90,14 @@ h1 {
     width: 100%;
 }
 
-#column1__billInput {
+#billInput {
     background: url(images/icon-dollar.svg) no-repeat right;
     background-color: var(--2Light-grayish-cyan);
     background-position: 4%;
 }
 
 
-#column1__billInput::placeholder, .column1__numberPeopleInput::placeholder {
+#billInput::placeholder, #people-input::placeholder {
     display: flex;
     color: var(--2Dark-grayish-cyan);
     font-size: 1.25rem;
@@ -104,7 +108,7 @@ h1 {
     text-align: right;
 }
 
-#column1__billInput:hover {
+#billInput:hover {
     cursor: pointer;
     border: 2.5px solid var(--Strong-cyan);
     margin: -2px;
@@ -118,11 +122,11 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-.column1__tipTitle, .column1__numberPeopleTitle, .column1__numberPeopleError {
+#tipTitle, #numberPeopleTitle, .column1__numberPeopleError {
     padding-top: 2rem;
 }
 
-.column1__tipsContainer {
+.tipsContainer {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -130,7 +134,7 @@ input[type=number]::-webkit-outer-spin-button {
     justify-items: center;
 }
 
-.column1__tipBtn {
+.tipBtn {
     height: 2.5rem;
     width: 27%;
     font-size: 20px;
@@ -147,13 +151,13 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 600; 
 }
 
-.column1__tipBtn:hover {
+.tipBtn:hover {
     color: hsl(183, 100%, 15%);
     cursor: pointer;
     background-color: var(--1Light-grayish-cyan);
 }
 
-#column1__tipsContainer--custom {
+#tipCustom {
     background-color: var(--2Light-grayish-cyan);
     height: 2.5rem;
     width: 25%;
@@ -168,29 +172,29 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
 }
 
-#column1__tipsContainer--custom:hover  {
+#tipCustom:hover  {
     border: 2.55px solid var(--Strong-cyan);
     cursor: pointer;
     width: 25%;
     height: 2.2rem;
 }
 
-.column1__numberPeopleStuff {
+#numberPeople-container {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
 }
 
-#input__container {
+#input-container {
     width: 100%;
 }
 
-.column1__numberPeopleTitle {
+#numberPeopleTitle {
     font-weight: 800;
 }
 
-.column1__numberPeopleErrorNotDisplayed {
+.error-hidden {
     font-weight: 800;
     color: rgba(255, 0, 0, 0.582);
     font-size: 0.8rem;
@@ -200,7 +204,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: none;
 }
 
-.column1__numberPeopleErrorDisplayed {
+.error {
     font-weight: 800;
     color: rgba(255, 0, 0, 0.582);
     font-size: 0.8rem;
@@ -214,7 +218,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: 2.5px solid red;
 }
 
-.column1__numberPeopleInput {
+#people-input {
     background: url(images/icon-person.svg) no-repeat right;
     background-color: var(--2Light-grayish-cyan);
     background-position: 4%;
@@ -296,7 +300,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-family: 'Space Mono', monospace;
     font-weight: 800;
     font-size: 1rem;
-    background-color: RGB(15, 129, 123);
+    background-color: hsl(185, 41%, 84%);
 }
 
 #resetBtn:hover {
@@ -305,7 +309,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: var(--Very-dark-cyan);
 }
 
-.selectedBtn {
+.active-tip {
     height: 2.5rem;
     width: 27%;
     font-size: 20px;
@@ -342,7 +346,7 @@ input[type=number]::-webkit-outer-spin-button {
         margin: 0;   
     }
 
-    .container {
+    .app-container {
         width: 90%;
         display: flex;
         flex-direction: column;
@@ -371,19 +375,19 @@ input[type=number]::-webkit-outer-spin-button {
         width: auto;
     }
 
-    .column1__billTitle, .column1__tipTitle, .column1__numberPeopleTitle {
+    #billTitle, #tipTitle, #numberPeopleTitle {
         color: var(--1Dark-grayish-cyan);
         font-size: 1rem;
         margin: 0;
         margin-bottom: 0.5rem;
     }
 
-    #column1__billInput, .column1__numberPeopleInput {
+    #billInput, #people-input {
         height: 2.7rem;
         
     }
 
-    .column1__numberPeopleInput {
+    .people-input {
         margin-bottom: 15px;
     }
 
@@ -393,18 +397,17 @@ input[type=number]::-webkit-outer-spin-button {
         flex-wrap: wrap;
     }
 
-    .column1__tipBtn, #column1__tipsContainer--custom {
+    .tipBtn, #tipCustom {
         width: 44%;
         height: 3rem;
         font-size: 25px;
     }
     
-    #column1__tipsContainer--custom:hover  {
+    #tipCustom:hover  {
         border: 2.55px solid var(--Strong-cyan);
         cursor: pointer;
         width: 42%;
         height: 2.8rem;
-        
     }
 
     .column2__container {

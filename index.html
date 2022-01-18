@@ -20,29 +20,31 @@
     <h1>SPLI</h1>
     <H1>TTER</H1>
   </header>
-  <div class="container">
+
+  <div class="app-container">
     <div class="column1">
-      <p class="column1__billTitle"><strong>Bill</strong></p>
-      <input type="number" name="inputValue" maxlength="6" placeholder="0" id="column1__billInput" oninput="getInputValue()" >
-      <p class="column1__tipTitle"><strong>Select Tip %</strong></p>
-      <div class="column1__tipsContainer">
-        <button id="column1__tipsContainer--five" class="column1__tipBtn">5%</button>
-        <button id="column1__tipsContainer--ten" class="column1__tipBtn">10%</button>
-        <button id="column1__tipsContainer--fifteen" class="column1__tipBtn">15%</button>
-        <button id="column1__tipsContainer--twentyfive" class="column1__tipBtn">25%</button>
-        <button id="column1__tipsContainer--fifty" class="column1__tipBtn">50%</button>
-        <input type="number" placeholder="Custom" id="column1__tipsContainer--custom"></button>
+      <p id="billTitle"><strong>Bill</strong></p>
+      <input type="number" name="inputValue" maxlength="6" placeholder="0" id="billInput" class="inp-style">
+      <p id="tipTitle"><strong>Select Tip %</strong></p>
+      <div class="tipsContainer">
+        <button class="tipBtn">5%</button>
+        <button class="tipBtn">10%</button>
+        <button class="tipBtn active-tip">15%</button>
+        <button class="tipBtn">25%</button>
+        <button class="tipBtn">50%</button>
+        <input type="number" placeholder="Custom" id="tipCustom" maxlength="3"></button>
       </div>
-      <div class="column1__numberPeopleStuff">
-        <p class="column1__numberPeopleTitle">Number of People</p>
-        <p id="zeroError" class="column1__numberPeopleErrorNotDisplayed">Can't be zero</p>
+      <div id="numberPeople-container">
+        <p id="numberPeopleTitle">Number of People</p>
+        <p id="zeroError" class="error-hidden">Can't be zero</p>
       </div>
-      <div id="input__container" class="inputContainer">
-        <input type="number" placeholder="0" class="column1__numberPeopleInput" oninput="getNumberOfPeople()">
+      <div id="input-container">
+        <input type="number" placeholder="0" id="people-input" class="inp-style">
       </div>
     </div>
     <div class="space">
     </div>
+    
     <div class="column2"> 
       <div class="column2__container">
         <div class="column2__container--boxOne">
@@ -79,6 +81,7 @@
       </div>
     </div> 
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
