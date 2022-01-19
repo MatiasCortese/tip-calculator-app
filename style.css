@@ -72,15 +72,12 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
-#billInput {
-    
-}
 
 .inp-style {
     background-color: var(--2Light-grayish-cyan);
     border-radius: 5px;
-    height: 2rem;
-    border: none;
+    height: 2.2rem;
+    border: 2px solid transparent;
     text-decoration: none;
     color: var(--Very-dark-cyan);
     font-family: 'Space Mono', monospace;
@@ -96,7 +93,6 @@ h1 {
     background-position: 4%;
 }
 
-
 #billInput::placeholder, #people-input::placeholder {
     display: flex;
     color: var(--2Dark-grayish-cyan);
@@ -110,8 +106,7 @@ h1 {
 
 #billInput:hover {
     cursor: pointer;
-    border: 2.5px solid var(--Strong-cyan);
-    margin: -2px;
+    border: 2px solid var(--Strong-cyan);
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -184,6 +179,7 @@ input[type=number]::-webkit-outer-spin-button {
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+
 }
 
 #input-container {
@@ -215,7 +211,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .redBorder {
-    border: 2.5px solid red;
+    border: 2px solid red;
 }
 
 #people-input {
@@ -227,7 +223,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .column2__container {
     background-color: var(--Very-dark-cyan);
-    height: 85%;
+    height: 86.5%;
     border-radius: 10px;
     padding: 1.5rem;
     display: flex;
@@ -417,6 +413,7 @@ input[type=number]::-webkit-outer-spin-button {
         padding: 1.5rem;
         display: flex;
         flex-direction: column;
+        margin-top: 2rem;
     }
 
     .column2__container--boxOne {
@@ -446,4 +443,5 @@ input[type=number]::-webkit-outer-spin-button {
     .boxOne__total {
         margin-bottom: 15px;
     }
+
 }

@@ -19,13 +19,13 @@ reset.addEventListener('click', resetApp)
 let billValue = 0 // default value
 let tipValue = 0.15 // default value -> 15% button is active
 let peopleValue = 1
+numOfPeople.value = 1
 
 function setBillValue() {
     billValue = bill.value
-    if(billValue > 0 && billValue < 1000000) {
+    if(billValue > 0) {
     calculations()
     } else {
-        alert("Please insert a bill")
         resetApp()
     }
     return billValue
@@ -73,18 +73,15 @@ function calculations() {
         if (custom.value == '') {
             let tipAmount = billValue * tipValue / peopleValue
             let total = billValue / peopleValue + tipAmount 
-            tipNumbers.innerHTML = "$" + tipAmount.toFixed(2)
-            totalNumbers.innerHTML = "$" + total.toFixed(2)
+            injectCalculations(tipAmount, total)
             return tipAmount, total
         }
         if (custom.value != '' && custom.value > 0 && custom.value <= 100 ) {
             removeActiveState()
-            let customValue = custom.value
-            customValue = customValue/100
+            let customValue = custom.value / 100
             let tipAmount = billValue * customValue / peopleValue
             let total = billValue / peopleValue + tipAmount 
-            tipNumbers.innerHTML = "$" + tipAmount.toFixed(2)
-            totalNumbers.innerHTML = "$" + total.toFixed(2)
+            injectCalculations(tipAmount, total)
             return tipAmount, total
         } 
 }
@@ -93,7 +90,7 @@ function resetApp() {
     tipNumbers.innerHTML = '$' + 0 + '.' + 0 + 0
     totalNumbers.innerHTML = '$' + 0 + '.' + 0 + 0
     bill.value = ''
-    numOfPeople.value = ''
+    numOfPeople.value = 1
     numOfPeople.classList.remove("redBorder")
     error.classList.remove("error")
     error.classList.add("error-hidden")
@@ -107,4 +104,9 @@ function removeActiveState() {
         // clear the active state
     btn.classList.remove('active-tip')
     })
+}
+
+function injectCalculations(tipAmount, total) {
+    tipNumbers.innerHTML = "$" + tipAmount.toFixed(2)
+    totalNumbers.innerHTML = "$" + total.toFixed(2)
 }
